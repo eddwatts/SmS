@@ -8,7 +8,7 @@ echo 'dtparam=spi=on' | sudo tee --append /boot/config.txt
 echo 'hdmi_force_hotplug=1' | sudo tee --append /boot/config.txt
 echo 'disable_splash=1' | sudo tee --append /boot/config.txt
 sudo raspi-config nonint do_memory_split 256
-sudo raspi-config nonint do_boot_wait 1
+sudo raspi-config nonint do_boot_wait 0
 sudo raspi-config nonint do_camera 0
 sudo raspi-config nonint do_i2c 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
