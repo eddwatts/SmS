@@ -1,3 +1,4 @@
+#!/bin/bash 
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
 #dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
