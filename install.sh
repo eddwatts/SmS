@@ -35,6 +35,8 @@ sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubuser
 sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg" -L
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh" -L
 chmod +x /home/pi/update.sh
+curl -o "/home/pi/cctv.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/cctv-bo.sh" -L
+chmod +x /home/pi/cctv.sh
 echo '@xset s off' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset s noblank' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
