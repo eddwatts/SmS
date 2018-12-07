@@ -44,4 +44,4 @@ sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
 sudo raspi-config nonint do_hostname $hostname
-echo \"raspberry\" ; echo \"$mypass\" ; echo \"$mypass\" | passwd
+sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
