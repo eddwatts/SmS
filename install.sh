@@ -1,12 +1,12 @@
 #!/bin/bash 
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
-#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
-dtoverlay=w1-gpio' | sudo tee --append /boot/config.txt
-dtparam=i2c_arm=on' | sudo tee --append /boot/config.txt
-dtparam=spi=on' | sudo tee --append /boot/config.txt
-hdmi_force_hotplug=1' | sudo tee --append /boot/config.txt
-disable_splash=1' | sudo tee --append /boot/config.txt
+echo '/#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
+echo 'dtoverlay=w1-gpio' | sudo tee --append /boot/config.txt
+echo 'dtparam=i2c_arm=on' | sudo tee --append /boot/config.txt
+echo 'dtparam=spi=on' | sudo tee --append /boot/config.txt
+echo 'hdmi_force_hotplug=1' | sudo tee --append /boot/config.txt
+echo 'disable_splash=1' | sudo tee --append /boot/config.txt
 sudo raspi-config nonint do_memory_split 256
 sudo raspi-config nonint do_boot_wait 1
 sudo raspi-config nonint do_camera 0
