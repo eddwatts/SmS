@@ -10,7 +10,10 @@ echo 'disable_splash=1' | sudo tee --append /boot/config.txt
 sudo raspi-config nonint do_memory_split 256
 sudo raspi-config nonint do_boot_wait 0
 sudo raspi-config nonint do_camera 0
+sudo raspi-config nonint do_spi 0
 sudo raspi-config nonint do_i2c 0
+sudo raspi-config nonint do_serial 0
+sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubusercontent.com/eddwatts/SmS/master//pi.png" -L
