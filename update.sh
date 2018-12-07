@@ -1,3 +1,4 @@
+#!/bin/bash
 source /boot/SmS.cfg
 printf "Waiting for Network"
 while true; do
