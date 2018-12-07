@@ -1,7 +1,7 @@
 #!/bin/bash 
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
-echo '/#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
+echo '#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
 echo 'dtoverlay=w1-gpio' | sudo tee --append /boot/config.txt
 echo 'dtparam=i2c_arm=on' | sudo tee --append /boot/config.txt
 echo 'dtparam=spi=on' | sudo tee --append /boot/config.txt
@@ -22,9 +22,9 @@ echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset s noblank' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@unclutter -idle 0 -root' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@/home/pi/update.sh' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
-sudo sed -i 's/@xscreensaver/\#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autostart
-sudo sed -i 's/@lxpanel/\#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
-sudo sed -i 's/point-rpi/\#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
+sudo sed -i 's/@xscreensaver/#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autostart
+sudo sed -i 's/@lxpanel/#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
+sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
 crontab -l > mycron
 echo "30 07 * * 1-5 sudo reboot" >> mycron
 echo "35 19 * * 1-5 /opt/vc/bin/tvservice -o" >> mycron
