@@ -12,8 +12,8 @@ sudo raspi-config nonint do_camera 0
 sudo raspi-config nonint do_i2c 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
-sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "http://10.1.0.12/pi.png" -L
-sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "http://10.1.0.12/desktop.jpg" -L
+sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://github.com/eddwatts/SmS/raw/master/pi.png" -L
+sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://github.com/eddwatts/SmS/raw/master/desktop.jpg" -L
 curl -o "/home/pi/update.sh" "https://github.com/eddwatts/SmS/raw/master/update.sh" -L
 chmod +x /home/pi/update.sh
 echo '@xset s off' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
