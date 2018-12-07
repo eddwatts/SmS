@@ -8,7 +8,8 @@
 # Short-Description: Displays camera feeds for monitoring 
 # Description: 
 ### END INIT INFO
-
+source /boot/SmS.cfg
+if test "$mode" = 'cctv"'; then
 # Camera Feeds & Positions 
 top_left="screen -dmS top_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 0 960 540\" rtsp://10.1.8.253:7447/5b85280cb07d32af7d9d5122_2 --live -n -1'"; 
 top_right="screen -dmS top_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 0 1920 540\" rtsp://10.1.8.253:7447/58d3d372e4b03b4107ccf2b3_2 --live -n -1'"; 
@@ -63,3 +64,4 @@ exit 1
 
 ;;
 esac
+fi
