@@ -20,9 +20,8 @@ sed -i 's/\"exit_type\":\"Crashed\"/\"exit_type\":\"Normal\"/' /home/pi/.config/
 chromium-browser --noerrdialogs --incognito --kiosk $url
 fi 
 if [[ $mode == *"cctv"* ]]; then
-echo $url
-echo '-o "/home/pi/cctv.sh" "$url" -L'
-curl -o "/home/pi/cctv.sh" "$url" -L
+echo getting $url
+curl -o "/home/pi/cctv.sh" $url -L
 chmod +x /home/pi/cctv.sh
 sudo /home/pi/cctv.sh stop
 sudo /home/pi/cctv.sh repair
