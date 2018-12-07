@@ -22,7 +22,9 @@ echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset s noblank' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@unclutter -idle 0 -root' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@/home/pi/update.sh' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
-
+sudo sed -i 's/@xscreensaver/\#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autostart
+sudo sed -i 's/@lxpanel/\#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
+sudo sed -i 's/point-rpi/\#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
 crontab -l > mycron
 echo "30 07 * * 1-5 sudo reboot" >> mycron
 echo "35 19 * * 1-5 /opt/vc/bin/tvservice -o" >> mycron
