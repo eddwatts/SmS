@@ -1,5 +1,6 @@
 #!/bin/bash
 source /boot/SmS.cfg
+IFS="$IFS"$'\r'
 printf "Waiting for Network"
 while true; do
     LC_ALL=C nmcli -t -f DEVICE,STATE dev | grep -q ":connected$"
