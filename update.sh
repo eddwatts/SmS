@@ -8,7 +8,7 @@ while true; do
         sleep 1
     fi
 done
-curl -o "/home/pi/tempnet.py" "https://github.com/eddwatts/SmS/raw/master/tempnet.py" -L
+curl -o "/home/pi/tempnet.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tempnet.py" -L
 chmod +x /home/pi/tempnet.py
 
 
