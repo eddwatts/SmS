@@ -1,4 +1,8 @@
-#!/bin/bash 
+#!/bin/bash
+echo "type hostname for this device: "
+read hostname
+echo "set password for this device: "
+read mypass
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
 echo '#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
@@ -39,3 +43,5 @@ sudo apt-get install network-manager unclutter screen omxplayer i2c-tools -y
 sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
+sudo raspi-config nonint do_hostname $hostname
+echo \"raspberry\" ; echo \"$mypass\" ; echo \"$mypass\" | passwd
