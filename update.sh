@@ -1,7 +1,7 @@
 #!/bin/bash
 printf "Waiting for Network"
 while true; do
-    LC_ALL=C nmcli -t -f DEVICE,STATE dev | grep -q ":connected$"
+  wget -q --spider http://google.com
     if [ $? -eq 0 ]; then
         break
     else
