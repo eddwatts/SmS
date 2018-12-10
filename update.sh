@@ -10,4 +10,4 @@ while true; do
 done
 curl -o "/home/pi/run.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/run.sh" -L
 chmod +x /home/pi/run.sh
-sudo /home/pi/run.sh
+/home/pi/run.sh
