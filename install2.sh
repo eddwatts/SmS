@@ -1,11 +1,4 @@
 #!/bin/bash
-echo "768 or 1080: "
-read res
-echo "type hostname for this device: "
-read hostname
-echo "set password for this device: "
-read mypass
-IFS="$IFS"$'\r'
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
 echo '#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
@@ -14,14 +7,6 @@ echo 'dtparam=i2c_arm=on' | sudo tee --append /boot/config.txt
 echo 'dtparam=spi=on' | sudo tee --append /boot/config.txt
 echo 'hdmi_force_hotplug=1' | sudo tee --append /boot/config.txt
 echo 'disable_splash=1' | sudo tee --append /boot/config.txt
-if [[ $res == *"768"* ]]; then
-echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
-echo 'hdmi_mode=16' | sudo tee --append /boot/config.txt
-fi
-if [[ $res == *"1080"* ]]; then
-echo 'hdmi_group=1' | sudo tee --append /boot/config.txt
-echo 'hdmi_mode=31' | sudo tee --append /boot/config.txt
-fi
 sudo raspi-config nonint do_memory_split 256
 sudo raspi-config nonint do_boot_wait 0
 sudo raspi-config nonint do_camera 0
@@ -52,9 +37,24 @@ echo "*/5 * * * * sudo /home/pi/tempnet.py" >> mycron
 echo "*/1 7-19 * * * sudo /home/pi/cctv.sh repair" >> mycron
 crontab mycron
 rm mycron
-sudo apt-get install network-manager unclutter screen omxplayer i2c-tools -y
+sudo apt-get install unclutter screen omxplayer i2c-tools -y
 sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
+echo "768 or 1080: "
+read res
+echo "type hostname for this device: "
+read hostname
+echo "set password for this device: "
+read mypass
+IFS="$IFS"$'\r'
+if [[ $res == *"768"* ]]; then
+echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
+echo 'hdmi_mode=16' | sudo tee --append /boot/config.txt
+fi
+if [[ $res == *"1080"* ]]; then
+echo 'hdmi_group=1' | sudo tee --append /boot/config.txt
+echo 'hdmi_mode=31' | sudo tee --append /boot/config.txt
+fi
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
