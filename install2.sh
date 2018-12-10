@@ -16,11 +16,11 @@ sudo raspi-config nonint do_serial 0
 sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
-sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubusercontent.com/eddwatts/SmS/master//pi.png" -L
-sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg" -L
-curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh" -L
+sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubusercontent.com/eddwatts/SmS/master//pi.png?id=$RANDOM" -L
+sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
+curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
-curl -o "/home/pi/cctv.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/cctv-bo.sh" -L
+curl -o "/home/pi/cctv.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/cctv-bo.sh?id=$RANDOM" -L
 chmod +x /home/pi/cctv.sh
 echo '@xset s off' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
