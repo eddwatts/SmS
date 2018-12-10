@@ -1,9 +1,9 @@
 #!/bin/bash
 source /boot/SmS.cfg
 IFS="$IFS"$'\r'
-curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh" -L
+curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
-curl -o "/home/pi/tempnet.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tempnet.py" -L
+curl -o "/home/pi/tempnet.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tempnet.py?id=$RANDOM" -L
 chmod +x /home/pi/tempnet.py
 if [[ $mode == *"kiosk"* ]]; then
 sed -i 's/\"exited_cleanly\":false/\"exited_cleanly\":true/' /home/pi/.config/chromium/Default/Preferences
