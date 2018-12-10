@@ -8,6 +8,6 @@ while true; do
         sleep 1
     fi
 done
-curl -o "/home/pi/run.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/run.py" -L
-chmod +x /home/pi/run.py
+curl -o "/home/pi/run.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/run.sh" -L
+chmod +x /home/pi/run.sh
 sudo /home/pi/run.sh
