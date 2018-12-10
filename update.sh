@@ -1,3 +1,4 @@
+#!/bin/bash
 printf "Waiting for Network"
 while true; do
     LC_ALL=C nmcli -t -f DEVICE,STATE dev | grep -q ":connected$"
@@ -9,4 +10,4 @@ while true; do
 done
 curl -o "/home/pi/run.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/run.py" -L
 chmod +x /home/pi/run.py
-sudo ./run.sh
+sudo /home/pi/run.sh
