@@ -1,8 +1,8 @@
 #!/bin/bash
 source /boot/SmS.cfg
 IFS="$IFS"$'\r'
-curl -o "/home/pi/update.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.py" -L
-chmod +x /home/pi/update.py
+curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh" -L
+chmod +x /home/pi/update.sh
 curl -o "/home/pi/tempnet.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tempnet.py" -L
 chmod +x /home/pi/tempnet.py
 if [[ $mode == *"kiosk"* ]]; then
