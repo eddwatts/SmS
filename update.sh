@@ -8,6 +8,6 @@ while true; do
         sleep 1
     fi
 done
-curl -o "/home/pi/run.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/run.sh" -L
+curl -o "/home/pi/run.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/run.sh?id=$RANDOM" -L
 chmod +x /home/pi/run.sh
 /home/pi/run.sh
