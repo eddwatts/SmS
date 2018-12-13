@@ -4,6 +4,7 @@ import os
 import requests
 import glob
 import time
+import socket
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -14,7 +15,14 @@ try:
   device_file = device_folder + '/w1_slave'
 except:
   print("no temp sensor")
-  
+
+try: 
+  host_name = socket.gethostname().upper()
+  host_ip = socket.gethostbyname(host_name).replace(".","").upper() 
+except: 
+  host_name = "NOT_AVAILABLE"
+  host_ip = "NOT_AVAILABLE"
+        
 def read_temp_raw():
   f = open(device_file, 'r')
   lines = f.readlines()
@@ -44,7 +52,7 @@ def getmac():
 
 print(getmac())
 #print(read_temp())
-link ="https://www.smsportals.co.uk/newtemp.php?mac="+getmac()+"&tempc=20.1"
+link ="https://www.smsportals.co.uk/newtemp.php?mac="+getmac()+"&hostname="+host_name+"&hostip="host_ip+"&tempc=20.1"
 f = requests.get(link)
 print(link)
 print(f.text)
