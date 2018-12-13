@@ -52,7 +52,7 @@ def getmac():
 
 print(getmac())
 #print(read_temp())
-link ="https://www.smsportals.co.uk/newtemp.php?mac="+getmac()+"&hostname="+host_name+"&hostip="host_ip+"&tempc=20.1"
+link ="https://www.smsportals.co.uk/newtemp.php?mac="+getmac()+"&hostname="+host_name+"&hostip="+host_ip+"&tempc=20.1"
 f = requests.get(link)
 print(link)
 print(f.text)
