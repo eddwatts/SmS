@@ -16,11 +16,15 @@ try:
 except:
   print("no temp sensor")
 
+cmd = "hostname -I | cut -d\' \' -f1"
+IP = subprocess.check_output(cmd, shell = True ).replace(".","")
+
 try: 
   host_name = socket.gethostname().upper()
 except: 
   host_name = "NOT_AVAILABLE"
         
+    
 def read_temp_raw():
   f = open(device_file, 'r')
   lines = f.readlines()
