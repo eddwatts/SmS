@@ -1,4 +1,4 @@
-read -p "clearing buffer 10" -t 1 -n 10000 discard
+read -p "clearing buffer" -t 1 -n 10000 discard
 read -p "768 or 1080: " res
 read -p "type hostname for this device: " hostname
 read -p "set password for this device: " mypass
