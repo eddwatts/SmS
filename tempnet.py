@@ -5,6 +5,7 @@ import requests
 import glob
 import time
 import socket
+import subprocess
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
