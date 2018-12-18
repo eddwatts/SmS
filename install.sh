@@ -44,6 +44,15 @@ sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
 read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
 echo "768 or 1080: "
 read res
 echo "type hostname for this device: "
