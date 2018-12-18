@@ -5,7 +5,6 @@ import requests
 import glob
 import time
 import socket
-import subprocess
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -16,9 +15,6 @@ try:
   device_file = device_folder + '/w1_slave'
 except:
   print("no temp sensor")
-
-cmd = "hostname -I | cut -d\' \' -f1"
-IP = subprocess.check_output(cmd, shell = True ).replace(".","")
 
 try: 
   host_name = socket.gethostname().upper()
