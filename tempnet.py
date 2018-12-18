@@ -49,9 +49,9 @@ def getmac():
       mac = "00:00:00:00:00:00"
   return mac[0:17].replace(":","").upper() 
 
-print(getmac())
+#print(getmac())
 #print(read_temp())
 link ="https://www.smsportals.co.uk/newtemp.php?mac="+getmac()+"&hostname="+host_name+"&tempc=20.1"
 f = requests.get(link)
-print(link)
+#print(link)
 print(f.text)
