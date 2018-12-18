@@ -1,4 +1,6 @@
 #!/bin/bash
+source /boot/SmS.cfg
+IFS="$IFS"$'\r'
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
 echo '#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
@@ -20,7 +22,7 @@ sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubuser
 sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
-curl -o "/home/pi/cctv.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/cctv-bo.sh?id=$RANDOM" -L
+curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
 chmod +x /home/pi/cctv.sh
 echo '@xset s off' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
