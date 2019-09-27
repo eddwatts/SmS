@@ -33,13 +33,11 @@ sudo sed -i 's/@xscreensaver/#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autosta
 sudo sed -i 's/@lxpanel/#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
 crontab -l > mycron
-echo "30 07 * * 1-5 sudo reboot" >> mycron
-echo "00 19 * * 1-5 /opt/vc/bin/tvservice -o" >> mycron
-echo "*/5 * * * * sudo /home/pi/tempnet.py" >> mycron
-echo "*/1 7-19 * * * sudo /home/pi/cctv.sh repair" >> mycron
-crontab mycron
+echo "00 07 * * * sudo reboot" >> mycron
+echo "00 23 * * * echo 'standby 0' | cec-client -s -d 1" >> mycron
+echo "59 6 * * * echo 'on 0' | cec-client -s -d 1" >> mycron
 rm mycron
-sudo apt-get install unclutter screen omxplayer i2c-tools -y
+sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils -y
 sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
