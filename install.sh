@@ -20,6 +20,8 @@ sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubusercontent.com/eddwatts/SmS/master//pi.png?id=$RANDOM" -L
 sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
+curl -o "/home/pi/button_shutdown.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/button_shutdown.py?id=$RANDOM" -L
+echo '~pi/button_shutdown.py &' | sudo tee --append /etc/rc.local
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
