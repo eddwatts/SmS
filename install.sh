@@ -21,6 +21,9 @@ sudo systemctl disable vncserver-x11-serviced.service
 sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubusercontent.com/eddwatts/SmS/master//pi.png?id=$RANDOM" -L
 sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 curl -o "/home/pi/button_shutdown.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/button_shutdown.py?id=$RANDOM" -L
+echo 'echo "18" > /sys/class/gpio/export' | sudo tee --append /etc/rc.local
+echo 'echo "out" > /sys/class/gpio/gpio18/direction' | sudo tee --append /etc/rc.local
+echo 'echo "1" > /sys/class/gpio/gpio18/value' | sudo tee --append /etc/rc.local
 echo '~pi/button_shutdown.py &' | sudo tee --append /etc/rc.local
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
@@ -37,7 +40,10 @@ sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
 crontab -l > mycron
 echo "00 07 * * * sudo reboot" >> mycron
 echo "00 23 * * * echo 'standby 0' | cec-client -s -d 1" >> mycron
+echo "00 23 * * * echo '0' > /sys/class/gpio/gpio18/value" >> mycron
 echo "59 6 * * * echo 'on 0' | cec-client -s -d 1" >> mycron
+echo "59 06 * * * echo '1' > /sys/class/gpio/gpio18/value" >> mycron
+
 rm mycron
 sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils -y
 sudo apt-get purge piwiz idle3 java-common geany -y
