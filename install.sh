@@ -23,9 +23,6 @@ sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.
 sudo curl -o "/usr/share/rpd-wallpaper/temple.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 curl -o "/home/pi/button_shutdown.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/button_shutdown.py?id=$RANDOM" -L
 chmod +x /home/pi/button_shutdown.py
-echo 'echo "27" > /sys/class/gpio/export' | sudo tee --append /etc/rc.local
-echo 'echo "out" > /sys/class/gpio/gpio27/direction' | sudo tee --append /etc/rc.local
-echo 'echo "1" > /sys/class/gpio/gpio27/value' | sudo tee --append /etc/rc.local
 echo '~pi/button_shutdown.py &' | sudo tee --append /etc/rc.local
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
