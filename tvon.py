@@ -7,3 +7,5 @@ import time
 relay = LED(27)
 relay.on()
 check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
+check_call(['sudo', 'tvservice -p'])
+check_call(['sudo', 'fbset -accel true'])
