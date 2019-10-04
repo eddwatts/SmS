@@ -18,7 +18,12 @@ def rls():
         if (held_for > 10.0):
                 check_call(['sudo', 'reboot'])
         elif (held_for > 5.0):
-                relay.toggle()
+                if not relay.is_lit:
+                        check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
+                        relay.on()
+                else:
+                        check_call(['sudo', 'echo standby 0 | cec-client -s -d 1'])
+                        relay.off()
         elif (held_for > 1.0):
                 if not relay.is_lit:
                         check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
