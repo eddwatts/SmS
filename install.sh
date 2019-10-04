@@ -42,10 +42,7 @@ sudo sed -i 's/@lxpanel/#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
 crontab -l >> mycron
 echo "00 07 * * 1-5 sudo reboot" >> mycron
-echo "00 19 * * 1-5 echo 'standby 0' | cec-client -s -d 1" >> mycron
-echo "00 19 * * 1-5 /opt/vc/bin/tvservice -o" >> mycron
 echo "00 19 * * 1-5 /home/pi/tvoff.py" >> mycron
-echo "30 06 * * 1-5 echo 'on 0' | cec-client -s -d 1" >> mycron
 echo "30 06 * * 1-5 /home/pi/tvon.py" >> mycron
 crontab mycron
 rm mycron
