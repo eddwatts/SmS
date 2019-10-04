@@ -20,25 +20,25 @@ def rls():
                 check_call(['sudo', 'reboot'])
         elif (held_for > 5.0):
                 if not relay.is_lit:
-                        check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
+                        #check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
                         relay.on()
                         check_call(['sudo', 'tvservice -p'])
                         check_call(['sudo', 'fbset -accel true'])
                 else:
-                        check_call(['sudo', 'echo standby 0 | cec-client -s -d 1'])
+                        #check_call(['sudo', 'echo standby 0 | cec-client -s -d 1'])
                         relay.off()
                         check_call(['sudo', 'fbset -accel false'])
                         check_call(['sudo', 'tvservice -o'])
         elif (held_for > 1.0):
                 if not relay.is_lit:
-                        check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
+                        #check_call(['sudo', 'echo on 0 | cec-client -s -d 1'])
                         relay.on()
                         check_call(['sudo', 'tvservice -p'])
                         check_call(['sudo', 'fbset -accel true'])
                         time.sleep(60)
-                        check_call(['sudo', 'echo standby 0 | cec-client -s -d 1'])
+                        #check_call(['sudo', 'echo standby 0 | cec-client -s -d 1'])
                         relay.off()
-                        check_call(['sudo', 'fbset -accel true'])
+                        check_call(['sudo', 'fbset -accel false'])
                         check_call(['sudo', 'tvservice -o'])                        
         else:
                 print("I'm not going to do anything now ...")
