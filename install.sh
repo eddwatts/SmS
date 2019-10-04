@@ -23,7 +23,7 @@ sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.
 sudo curl -o "/usr/share/rpd-wallpaper/temple.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 curl -o "/home/pi/button_shutdown.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/button_shutdown.py?id=$RANDOM" -L
 chmod +x /home/pi/button_shutdown.py
-echo '~pi/button_shutdown.py &' | sudo tee --append /etc/rc.local
+sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/button_shutdown.py \&\n&/' /etc/rc.local
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
