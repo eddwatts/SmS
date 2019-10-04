@@ -22,6 +22,7 @@ sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubuser
 sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 sudo curl -o "/usr/share/rpd-wallpaper/temple.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 curl -o "/home/pi/button_shutdown.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/button_shutdown.py?id=$RANDOM" -L
+chmod +x /home/pi/button_shutdown.py
 echo 'echo "27" > /sys/class/gpio/export' | sudo tee --append /etc/rc.local
 echo 'echo "out" > /sys/class/gpio/gpio27/direction' | sudo tee --append /etc/rc.local
 echo 'echo "1" > /sys/class/gpio/gpio27/value' | sudo tee --append /etc/rc.local
