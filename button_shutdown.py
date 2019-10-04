@@ -7,6 +7,7 @@ import time
 
 held_for=0.0
 relay = LED(27)
+relay.on()
 
 def rls():
         global held_for
