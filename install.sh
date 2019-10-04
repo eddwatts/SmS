@@ -38,12 +38,14 @@ echo '@/home/pi/update.sh' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autost
 sudo sed -i 's/@xscreensaver/#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/@lxpanel/#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
-crontab -l > mycron
+crontab -l >> mycron
 echo "00 07 * * 1-5 sudo reboot" >> mycron
 echo "00 19 * * 1-5 echo 'standby 0' | cec-client -s -d 1" >> mycron
 echo "00 19 * * 1-5 /opt/vc/bin/tvservice -o" >> mycron
 echo "00 19 * * 1-5 /home/pi/tvoff.py" >> mycron
 echo "30 06 * * 1-5 echo 'on 0' | cec-client -s -d 1" >> mycron
+echo "30 06 * * 1-5 /home/pi/tvon.py" >> mycron
+crontab mycron
 rm mycron
 sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils -y
 sudo apt-get purge piwiz idle3 java-common geany -y
