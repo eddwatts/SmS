@@ -68,7 +68,7 @@ read -t 1 -n 100000 discard
 read -t 1 -n 100000 discard 
 read -p "clearing buffer" -t 1 -n 10000 discard
 echo -ne "\033c"
-read -p "768 or 1080: " res
+read -p "768,1080,1366: " res
 read -p "type hostname for this device: " hostname
 read -p "password for this device: " mypass
 IFS="$IFS"$'\r'
@@ -81,7 +81,11 @@ if [[ $res == *"1080"* ]]; then
 echo 'hdmi_group=1' | sudo tee --append /boot/config.txt
 echo 'hdmi_mode=31' | sudo tee --append /boot/config.txt
 echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
-
+fi
+if [[ $res == *"1366"* ]]; then
+echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
+echo 'hdmi_mode=81' | sudo tee --append /boot/config.txt
+echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
 fi
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
