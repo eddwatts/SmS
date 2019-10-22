@@ -5,9 +5,10 @@ sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
 echo '#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
 echo 'dtoverlay=w1-gpio' | sudo tee --append /boot/config.txt
-echo 'dtparam=i2c_arm=on' | sudo tee --append /boot/config.txt
-echo 'dtparam=spi=on' | sudo tee --append /boot/config.txt
-echo 'hdmi_force_hotplug=1' | sudo tee --append /boot/config.txt
+#echo 'dtparam=i2c_arm=on' | sudo tee --append /boot/config.txt
+#echo 'dtparam=spi=on' | sudo tee --append /boot/config.txt
+#echo 'hdmi_force_hotplug=1' | sudo tee --append /boot/config.txt
+sudo sed -i 's/#hdmi_force_hotplug=1/hdmi_force_hotplug=1/' /boot/config.txt
 echo 'disable_splash=1' | sudo tee --append /boot/config.txt
 sudo raspi-config nonint do_memory_split 256
 sudo raspi-config nonint do_boot_wait 0
@@ -74,19 +75,28 @@ read -p "type hostname for this device: " hostname
 read -p "password for this device: " mypass
 IFS="$IFS"$'\r'
 if [[ $res == *"768"* ]]; then
-echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
-echo 'hdmi_mode=16' | sudo tee --append /boot/config.txt
-echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
+sudo sed -i 's/#hdmi_group=1/hdmi_group=2/' /boot/config.txt
+sudo sed -i 's/#hdmi_mode=1/hdmi_mode=16/' /boot/config.txt
+sudo sed -i 's/#disable_overscan=1/disable_overscan=1/' /boot/config.txt
+#echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
+#echo 'hdmi_mode=16' | sudo tee --append /boot/config.txt
+#echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
 fi
 if [[ $res == *"1080"* ]]; then
-echo 'hdmi_group=1' | sudo tee --append /boot/config.txt
-echo 'hdmi_mode=31' | sudo tee --append /boot/config.txt
-echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
+sudo sed -i 's/#hdmi_group=1/hdmi_group=1/' /boot/config.txt
+sudo sed -i 's/#hdmi_mode=1/hdmi_mode=31/' /boot/config.txt
+sudo sed -i 's/#disable_overscan=1/disable_overscan=1/' /boot/config.txt
+#echo 'hdmi_group=1' | sudo tee --append /boot/config.txt
+#echo 'hdmi_mode=31' | sudo tee --append /boot/config.txt
+#echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
 fi
 if [[ $res == *"1366"* ]]; then
-echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
-echo 'hdmi_mode=81' | sudo tee --append /boot/config.txt
-echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
+sudo sed -i 's/#hdmi_group=1/hdmi_group=2/' /boot/config.txt
+sudo sed -i 's/#hdmi_mode=1/hdmi_mode=81/' /boot/config.txt
+sudo sed -i 's/#disable_overscan=1/disable_overscan=1/' /boot/config.txt
+#echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
+#echo 'hdmi_mode=81' | sudo tee --append /boot/config.txt
+#echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
 fi
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
