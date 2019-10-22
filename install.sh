@@ -52,7 +52,7 @@ echo "55 6 * * * echo 'on 0' | cec-client -s -d 1" >> mycron
 echo "55 6 * * 1-5 /home/pi/tvon.py" >> mycron
 crontab mycron
 rm mycron
-sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils -y
+sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils wkhtmltopdf -y
 sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
