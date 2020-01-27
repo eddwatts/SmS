@@ -46,12 +46,12 @@ sudo sed -i 's/@xscreensaver/#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autosta
 sudo sed -i 's/@lxpanel/#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
 crontab -l >> mycron
-echo "#* 6-19 * * 1-5 wkhtmltoimage --javascript-delay 10000 --height 1080 --width 1920 --quality 100 https://dakboard.com/screen/uuid/5d975b6f-108291-b306-75f61e0ddff0 /home/pi/Schoolinternet/staffboard/SMS-SB.jpg" >> mycron
-echo "00 07 * * 1-5 sudo reboot" >> mycron
-echo "00 19 * * 1-5 /home/pi/tvoff.py" >> mycron
-echo "0 19 * * * echo 'standby 0' | cec-client -s -d 1" >> mycron
-echo "55 6 * * * echo 'on 0' | cec-client -s -d 1" >> mycron
-echo "55 6 * * 1-5 /home/pi/tvon.py" >> mycron
+echo "#* 6-19 * * * wkhtmltoimage --javascript-delay 10000 --height 1080 --width 1920 --quality 100 https://dakboard.com/screen/uuid/5d975b6f-108291-b306-75f61e0ddff0 /home/pi/Schoolinternet/staffboard/SMS-SB.jpg" >> mycron
+echo "30 06 * * * sudo reboot" >> mycron
+echo "00 21 * * * /home/pi/tvoff.py" >> mycron
+echo "0 21 * * * echo 'standby 0' | cec-client -s -d 1" >> mycron
+echo "25 6 * * * echo 'on 0' | cec-client -s -d 1" >> mycron
+echo "25 6 * * * /home/pi/tvon.py" >> mycron
 crontab mycron
 rm mycron
 sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils wkhtmltopdf -y
