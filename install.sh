@@ -50,8 +50,10 @@ echo "#* 6-19 * * * wkhtmltoimage --javascript-delay 10000 --height 1080 --width
 echo "28 06 * * * sudo reboot" >> mycron
 echo "00 21 * * * /home/pi/tvoff.py" >> mycron
 echo "0 21 * * * echo 'standby 0' | cec-client -s -d 1" >> mycron
+echo "0 21 * * * vcgencmd display_power 0
 echo "25 6 * * * echo 'on 0' | cec-client -s -d 1" >> mycron
 echo "25 6 * * * /home/pi/tvon.py" >> mycron
+echo "25 6 * * * vcgencmd display_power 1
 crontab mycron
 rm mycron
 sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils wkhtmltopdf -y
