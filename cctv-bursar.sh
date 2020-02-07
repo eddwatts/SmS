@@ -13,7 +13,7 @@ if [[ $mode == *"cctv"* ]]; then
 # Camera Feeds & Positions 
 #cam1="screen -dmS cam1 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0,0,512,384\" rtsp://10.1.8.253:7447/55ba48dde68320b007c9171e_2 --crop 0,0,480,360 --live -n -1'"; 
 cam1="screen -dmS cam1 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0,0,512,384\" rtsp://10.1.8.253:7447/5b85280cb07d32af7d9d5122_2 --crop 160,0,640,360 --live -n -1'"; 
-cam2="screen -dmS cam2 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"512,0,768,192\" rtsp://10.1.8.253:7447/58d3d7c3e4b0f5ccd5c9fac4_2 --crop 0,0,480,360 --live -n -1'"; 
+cam2="screen -dmS cam2 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"512,0,768,192\" rtsp://10.1.8.253:7447/5b5594b1429163364af61e46_2 --crop 0,0,480,360 --live -n -1'"; 
 cam3="screen -dmS cam3 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"768,0,1024,192\" rtsp://10.1.8.253:7447/58d3d58ee4b03b4107ccf8b4_2 --crop 0,0,480,360 --live -n -1'"; 
 cam4="screen -dmS cam4 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"512,192,768,384\" rtsp://10.1.8.253:7447/55afbd53e68320b007c89f05_2 --crop 0,0,480,360 --live -n -1'"; 
 cam5="screen -dmS cam5 sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"768,192,1024,384\" rtsp://10.1.8.253:7447/58d3d92be4b0f5ccd5ca0149_2 --crop 0,0,480,360 --live -n -1'"; 
