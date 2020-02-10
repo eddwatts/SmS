@@ -88,8 +88,8 @@ if [[ $res == *"1080"* ]]; then
 sudo sed -i 's/#hdmi_group=1/hdmi_group=1/' /boot/config.txt
 sudo sed -i 's/#hdmi_mode=1/hdmi_mode=31/' /boot/config.txt
 sudo sed -i 's/#disable_overscan=1/disable_overscan=1/' /boot/config.txt
-#echo 'hdmi_group=1' | sudo tee --append /boot/config.txt
-#echo 'hdmi_mode=31' | sudo tee --append /boot/config.txt
+#echo 'hdmi_group=2' | sudo tee --append /boot/config.txt
+#echo 'hdmi_mode=82' | sudo tee --append /boot/config.txt
 #echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
 fi
 if [[ $res == *"1366"* ]]; then
