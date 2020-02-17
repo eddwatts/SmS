@@ -37,6 +37,7 @@ curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/mas
 chmod +x /home/pi/update.sh
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
 chmod +x /home/pi/cctv.sh
+sudo touch /etc/chromium-browser/customizations/01-disable-update-check;echo CHROMIUM_FLAGS=\"\$\{CHROMIUM_FLAGS\} --check-for-update-interval=31536000\" | sudo tee /etc/chromium-browser/customizations/01-disable-update-check
 echo '@xset s off' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset s noblank' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
