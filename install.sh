@@ -1,5 +1,20 @@
 #!/bin/bash
 source /boot/SmS.cfg
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -t 1 -n 100000 discard 
+read -p "clearing buffer" -t 1 -n 10000 discard
+echo -ne "\033c"
+read -p "768,1080,1366: " res
+read -p "type hostname for this device: " hostname
+read -p "password for this device: " mypass
 IFS="$IFS"$'\r'
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
@@ -61,21 +76,6 @@ sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils wkhtmltopdf 
 sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -p "clearing buffer" -t 1 -n 10000 discard
-echo -ne "\033c"
-read -p "768,1080,1366: " res
-read -p "type hostname for this device: " hostname
-read -p "password for this device: " mypass
 IFS="$IFS"$'\r'
 if [[ $res == *"768"* ]]; then
 sudo sed -i 's/#hdmi_group=1/hdmi_group=2/' /boot/config.txt
@@ -103,3 +103,4 @@ sudo sed -i 's/#disable_overscan=1/disable_overscan=1/' /boot/config.txt
 fi
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
+sudo reboot
