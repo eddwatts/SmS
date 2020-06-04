@@ -1,3 +1,4 @@
+#!/bin/bash
 read -t 1 -n 100000 discard 
 read -t 1 -n 100000 discard 
 read -t 1 -n 100000 discard 
@@ -38,3 +39,4 @@ sudo apt-get clean
 sudo apt-get autoremove -y
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
+sudo reboot
