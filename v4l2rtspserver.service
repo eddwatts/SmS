@@ -1,0 +1,14 @@
+[Unit]
+Description=V4L2 RTSP server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/v4l2rtspserver -F20 -H 720 -W1080 -P 554 /dev/video0
+User=pi
+Restart=always
+RestartSec=1
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target
