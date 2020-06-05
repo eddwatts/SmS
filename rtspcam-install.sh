@@ -30,8 +30,7 @@ sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 libio-sock
 sudo remoteit signin $rituser $rituser
 sudo remoteit setup $hostname
 sudo remoteit add SSL 22 -t SSH
-sudo remoteit add HTTP 80 -t HTTP
-sudo remoteit add HTTPS 443 -t HTTPS
+sudo sudo remoteit add "remoteit Admin Panel" 29999 -t 7
 sudo rm /etc/ddclient.conf
 echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
 echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
@@ -73,7 +72,9 @@ echo '  </VirtualHost>' | sudo tee --append /etc/apache2/sites-available/motione
 echo '</IfModule>' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 sudo a2ensite motioneye.conf
 sudo systemctl restart apache2
-sudo apt install -y remoteit
-sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
+sudo remoteit add HTTP 80 -t HTTP
+sudo remoteit add Motioneye HTTP 8765 -t HTTP
+sudo remoteit add HTTPS 443 -t HTTPS
 sudo raspi-config nonint do_hostname $hostname
+sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
 sudo reboot
