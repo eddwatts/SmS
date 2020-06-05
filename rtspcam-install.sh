@@ -5,6 +5,8 @@ read -p "type hostname for this device: " hostname
 read -p "changeip.com Domain: " mydom
 read -p "changeip.com Username: " mydomuser
 read -p "changeip.com Password: " mydompass
+read -p "remote.it Username: " rituser
+read -p "remote.it Password: " ritpass
 read -p "password for this device: " mypass
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
@@ -25,6 +27,11 @@ sudo systemctl disable vncserver-x11-serviced.service
 sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
 sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 libio-socket-ssl-perl remoteit
+sudo remoteit signin $rituser $rituser
+sudo remoteit setup $hostname
+sudo remoteit add SSL 22 -t SSH
+sudo remoteit add HTTP 80 -t HTTP
+sudo remoteit add HTTPS 443 -t HTTPS
 sudo rm /etc/ddclient.conf
 echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
 echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
