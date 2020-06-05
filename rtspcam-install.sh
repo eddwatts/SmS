@@ -23,7 +23,7 @@ sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
-sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 tornado jinja2 jinja2 libio-socket-ssl-perl remoteit 
+sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 tornado libio-socket-ssl-perl remoteit 
 sudo rm /etc/ddclient.conf
 echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
 echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
@@ -39,8 +39,8 @@ sudo sed -i -e 's/run_daemon="false"/run_daemon="true"/' /etc/default/ddclient
 sudo ddclient -debug -noquiet
 sudo service ddclient start
 sudo apt-get install -y apache2 python-certbot-apache
-sudo certbot --apache
-certbot certonly --standalone -d $mydom -d www.$mydom
+#sudo certbot --apache
+#certbot certonly --standalone -d $mydom -d www.$mydom
 sudo pip install motioneye
 sudo cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
 sudo cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
