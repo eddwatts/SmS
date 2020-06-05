@@ -3,11 +3,13 @@ read -p "clearing buffer" -t 1 -n 10000 discard
 echo -ne "\033c"
 read -p "type hostname for this device: " hostname
 read -p "password for this device: " mypass
-read -p "remote.it Username: " rituser
+read -p "Your email: " myemail
+rituser=$myemail
+mydomuser=$myemail
+read -e -i "$rituser" -p "remote.it Username: " rituser
 read -p "remote.it Password: " ritpass
-read -p "Your email for letsencript renewals: " myemail
 read -p "changeip.com Domain: " mydom
-read -p "changeip.com Username: " mydomuser
+read -e -i "$mydomuser" -p "changeip.com Username: " mydomuser
 read -p "changeip.com Password: " mydompass
 echo -ne "\033c"
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
