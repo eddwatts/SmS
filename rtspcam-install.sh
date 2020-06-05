@@ -2,12 +2,12 @@
 read -p "clearing buffer" -t 1 -n 10000 discard
 echo -ne "\033c"
 read -p "type hostname for this device: " hostname
+read -p "password for this device: " mypass
+read -p "remote.it Username: " rituser
+read -p "remote.it Password: " ritpass
 read -p "changeip.com Domain: " mydom
 read -p "changeip.com Username: " mydomuser
 read -p "changeip.com Password: " mydompass
-read -p "remote.it Username: " rituser
-read -p "remote.it Password: " ritpass
-read -p "password for this device: " mypass
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
 echo '#dtoverlay=vc4-kms-v3d' | sudo tee --append /boot/config.txt
