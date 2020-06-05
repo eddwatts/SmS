@@ -5,6 +5,7 @@ read -p "type hostname for this device: " hostname
 read -p "password for this device: " mypass
 read -p "remote.it Username: " rituser
 read -p "remote.it Password: " ritpass
+read -p "Your email for letsencript renewals: " myemail
 read -p "changeip.com Domain: " mydom
 read -p "changeip.com Username: " mydomuser
 read -p "changeip.com Password: " mydompass
@@ -24,14 +25,13 @@ sudo raspi-config nonint do_serial 0
 sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
-sudo apt-get install -y git remoteit
-sudo remoteit signin $rituser $ritpass
+sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
+sudo apt-get install -y python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev ffmpeg git libmariadb3 libpq5 libmicrohttpd12 libio-socket-ssl-perl remoteit
+sudo remoteit signin $rituser $rituser
 sudo remoteit setup $hostname
 sudo remoteit add SSL 22 -t SSH
 sudo sudo remoteit add "remoteit Admin Panel" 29999 -t 7
-sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
-sudo apt-get install -y ffmpeg libmariadb3 libpq5 libmicrohttpd12 libio-socket-ssl-perl
 sudo rm /etc/ddclient.conf
 echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
 echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
@@ -46,10 +46,14 @@ echo '  '$mydom | sudo tee --append /etc/ddclient.conf
 sudo sed -i -e 's/run_daemon="false"/run_daemon="true"/' /etc/default/ddclient
 sudo ddclient -debug -noquiet
 sudo service ddclient start
-sudo apt-get install -y apache2 python-certbot-apache
-sudo certbot --apache
-certbot certonly --standalone -d $mydom -d www.$mydom
+wget https://github.com/Motion-Project/motion/releases/download/release-4.2.2/pi_buster_motion_4.2.2-1_armhf.deb
+sudo dpkg -i pi_buster_motion_4.2.2-1_armhf.deb
 sudo pip install motioneye
+sudo apt-get install -y apache2 python-certbot-apache
+echo 'rsa-key-size = 4096' | sudo tee --append /etc/letsencrypt/cli.ini
+echo 'email = '$myemail | sudo tee --append /etc/letsencrypt/cli.ini
+echo 'domains = '$mydom | sudo tee --append /etc/letsencrypt/cli.ini
+sudo certbot --apache
 sudo cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
 sudo cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
 sudo systemctl daemon-reload
