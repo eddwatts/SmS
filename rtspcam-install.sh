@@ -23,7 +23,8 @@ sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo mkdir -p /etc/motioneye && mkdir -p /var/lib/motioneye && mkdir /home/pi/noip
-sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 tornado jinja2 jinja2 libio-socket-ssl-perl ddclient samba samba-common-bin
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
+sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 tornado jinja2 jinja2 libio-socket-ssl-perl remoteit 
 sudo rm /etc/ddclient.conf
 echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
 echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
