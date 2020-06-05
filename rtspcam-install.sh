@@ -25,7 +25,7 @@ sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo apt-get install -y git remoteit
-sudo remoteit signin $rituser $rituser
+sudo remoteit signin $rituser $ritpass
 sudo remoteit setup $hostname
 sudo remoteit add SSL 22 -t SSH
 sudo sudo remoteit add "remoteit Admin Panel" 29999 -t 7
