@@ -27,11 +27,13 @@ sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
-sudo apt-get install -y python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev ffmpeg git libmariadb3 libpq5 libmicrohttpd12 libio-socket-ssl-perl remoteit
+sudo apt-get install -y remoteit
 sudo remoteit signin $rituser $rituser
 sudo remoteit setup $hostname
 sudo remoteit add SSL 22 -t SSH
 sudo sudo remoteit add "remoteit Admin Panel" 29999 -t 7
+sudo apt-get install -y python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev ffmpeg git libmariadb3 libpq5 libmicrohttpd12 libio-socket-ssl-perl
+sudo pip install tornado jinja2 pillow pycurl
 sudo rm /etc/ddclient.conf
 echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
 echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
