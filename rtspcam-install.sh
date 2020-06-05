@@ -67,5 +67,6 @@ echo '</IfModule>' | sudo tee --append /etc/apache2/sites-available/motioneye.co
 sudo a2ensite motioneye.conf
 sudo systemctl restart apache2
 sudo apt install -y remoteit
-sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
+sudo raspi-config nonint do_hostname $hostname
+reboot
