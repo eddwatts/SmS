@@ -31,12 +31,6 @@ sudo systemctl disable vncserver-x11-serviced.service
 sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
 sudo apt-get install -y remoteit
-sudo remoteit signin $rituser $ritpass
-echo -ne "\033c"
-sudo remoteit setup $hostname
-echo -ne "\033c"
-sudo remoteit add SSL 22 -t SSH
-sudo sudo remoteit add "remoteit Admin Panel" 29999 -t 7
 sudo apt-get install -y python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev ffmpeg git libmariadb3 libpq5 libmicrohttpd12 libio-socket-ssl-perl
 sudo pip install tornado jinja2 pillow pycurl
 sudo rm /etc/ddclient.conf
@@ -87,9 +81,13 @@ echo '</IfModule>' | sudo tee --append /etc/apache2/sites-available/motioneye.co
 echo -ne "\033c"
 sudo a2ensite motioneye.conf
 sudo systemctl restart apache2
+sudo remoteit signin $rituser $ritpass
+sudo remoteit setup $hostname
+sudo remoteit add SSL 22 -t SSH
+sudo remoteit add "remoteit Admin Panel" 29999 -t 7
 sudo remoteit add HTTP 80 -t HTTP
-sudo remoteit add Motioneye HTTP 8765 -t HTTP
 sudo remoteit add HTTPS 443 -t HTTPS
+sudo remoteit add "Motioneye HTTP" 8765 -t HTTP
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
 sudo reboot
