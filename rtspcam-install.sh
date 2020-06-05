@@ -1,18 +1,10 @@
 #!/bin/bash
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
-read -t 1 -n 100000 discard 
 read -p "clearing buffer" -t 1 -n 10000 discard
 echo -ne "\033c"
 read -p "type hostname for this device: " hostname
-read -p "no-ip domain: " mydom
+read -p "changeip.com Domain: " mydom
+read -p "changeip.com Username: " mydomuser
+read -p "changeip.com Password: " mydompass
 read -p "password for this device: " mypass
 sudo sed -i 's/console=tty1/console=tty3 loglevel=3 logo.nologo/' /boot/cmdline.txt
 sudo sed -i -e "s/BOOT_UART=0/BOOT_UART=1/" /boot/bootcode.bin
@@ -31,7 +23,22 @@ sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo mkdir -p /etc/motioneye && mkdir -p /var/lib/motioneye && mkdir /home/pi/noip
-sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 tornado jinja2 jinja2 apache2 python-certbot-apache
+sudo apt-get install -y ffmpeg git libmariadb3 libpq5 libmicrohttpd12 tornado jinja2 jinja2 libio-socket-ssl-perl ddclient samba samba-common-bin
+sudo rm /etc/ddclient.conf
+echo '  #tell ddclient how to get your ip address' | sudo tee --append /etc/ddclient.conf
+echo '  use=web, web=ip.changeip.com' | sudo tee --append /etc/ddclient.conf
+echo '  #provide server and login details' | sudo tee --append /etc/ddclient.conf
+echo '  protocol=changeip' | sudo tee --append /etc/ddclient.conf
+echo '  ssl=yes' | sudo tee --append /etc/ddclient/ddclient.conf
+echo '  server=nic.changeip.com/nic/update' | sudo tee --append /etc/ddclient.conf
+echo '  login='$mydomuser | sudo tee --append /etc/ddclient.conf
+echo '  password='$mydompass | sudo tee --append /etc/ddclient.conf
+echo '  #specify the domain to update' | sudo tee --append /etc/ddclient.conf
+echo '  '$mydom | sudo tee --append /etc/ddclient.conf
+sudo sed -i -e 's/run_daemon="false"/run_daemon="true"/' /etc/default/ddclient
+sudo ddclient -debug -noquiet
+sudo service ddclient start
+sudo apt-get install -y apache2 python-certbot-apache
 sudo certbot --apache
 certbot certonly --standalone -d $mydom -d www.$mydom
 sudo pip install motioneye
@@ -45,9 +52,9 @@ echo 'Listen 443' | sudo tee --append /etc/apache2/sites-available/motioneye.con
 echo '<IfModule mod_ssl.c>' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 echo 'ServerName thelazys.hopto.org' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 echo '    SSLEngine on' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
-echo 'SSLCertificateFile    /etc/letsencrypt/live/$mydom/cert.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
-echo 'SSLCertificateKeyFile /etc/letsencrypt/live/$mydom/privkey.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
-echo 'SSLCertificateChainFile /etc/letsencrypt/live/$mydom/fullchain.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
+echo 'SSLCertificateFile    /etc/letsencrypt/live/'$mydom'/cert.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
+echo 'SSLCertificateKeyFile /etc/letsencrypt/live/'$mydom'/privkey.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
+echo 'SSLCertificateChainFile /etc/letsencrypt/live/'$mydom'/fullchain.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 #echo '    SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 #echo '    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 echo '  <VirtualHost _default_:8443>' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
@@ -58,29 +65,6 @@ echo '  </VirtualHost>' | sudo tee --append /etc/apache2/sites-available/motione
 echo '</IfModule>' | sudo tee --append /etc/apache2/sites-available/motioneye.conf
 sudo a2ensite motioneye.conf
 sudo systemctl restart apache2
-cd /home/pi/noip
-wget https://www.noip.com/client/linux/noip-duc-linux.tar.gz
-tar vzxf noip-duc-linux.tar.gz
-cd noip-2.1.9-1
-sudo make
-sudo make install
-noip2.service
-echo '[Unit]' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'Description=V4L2 RTSP server' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'After=network.target' | sudo tee --append /lib/systemd/system/noip2.service
-echo '' | sudo tee --append /lib/systemd/system/noip2.service
-echo '[Service]' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'Type=simple' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'ExecStart=noip2' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'User=pi' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'Restart=always' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'RestartSec=1' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'StartLimitIntervalSec=0' | sudo tee --append /lib/systemd/system/noip2.service
-echo '' | sudo tee --append /lib/systemd/system/noip2.service
-echo '[Install]' | sudo tee --append /lib/systemd/system/noip2.service
-echo 'WantedBy=multi-user.target' | sudo tee --append /lib/systemd/system/noip2.service
-sudo systemctl enable noip2
-sudo systemctl start noip2
 sudo apt install -y remoteit
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
