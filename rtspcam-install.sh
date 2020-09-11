@@ -28,6 +28,9 @@ sudo raspi-config nonint do_serial 0
 sudo raspi-config nonint do_onewire 0
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
+curl -o "/home/pi/blink_ip.py" https://raw.githubusercontent.com/Matthias-Wandel/pi_blink_ip/master/blink_ip.py?id=$RANDOM" -L
+chmod +x /home/pi/blink_ip.py
+sudo /home/pi/blink_ip.py install
 sudo mkdir -p /etc/motioneye && sudo mkdir -p /var/lib/motioneye
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq ddclient < /dev/null > /dev/null
 sudo apt-get install -y remoteit
