@@ -39,6 +39,9 @@ sudo curl -o "/usr/share/rpd-wallpaper/road.jpg" "https://raw.githubusercontent.
 sudo curl -o "/usr/share/rpd-wallpaper/temple.jpg" "https://raw.githubusercontent.com/eddwatts/SmS/master/desktop.jpg?id=$RANDOM" -L
 curl -o "/home/pi/button_shutdown.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/button_shutdown.py?id=$RANDOM" -L
 chmod +x /home/pi/button_shutdown.py
+curl -o "/home/pi/blink_ip.py" https://raw.githubusercontent.com/Matthias-Wandel/pi_blink_ip/master/blink_ip.py?id=$RANDOM" -L
+chmod +x /home/pi/blink_ip.py
+sudo /home/pi/blink_ip.py install
 curl -o "/home/pi/tvoff.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tvoff.py?id=$RANDOM" -L
 chmod +x /home/pi/tvoff.py
 curl -o "/home/pi/tvon.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tvon.py?id=$RANDOM" -L
