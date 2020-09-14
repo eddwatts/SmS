@@ -17,3 +17,8 @@ chmod +x /home/pi/cctv.sh
 sudo /home/pi/cctv.sh stop
 sudo /home/pi/cctv.sh repair
 fi
+if [[ $mode == *"NewView"* ]]; then
+sudo systemctl stop displaycameras.service
+curl -o "/etc/displaycameras/layout.conf.default" $url?random=$RANDOM -L
+sudo systemctl start displaycameras.service
+fi
