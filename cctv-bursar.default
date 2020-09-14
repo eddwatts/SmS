@@ -1,0 +1,116 @@
+# This is the camera feed/windows layout configuration file for the
+# displaycameras service.  It ONLY configures the layout and feeds for
+# the cameras; the rest of the configuration is in displaycameras.conf.
+# See the comments in that file for notes on configuring the below.
+
+# This example defines seven 1/2-HD windows, three of which are off-screen to the right,
+# through which the service rotates six camera feeds (it actually uses only six windows)
+# on a full-HD monitor.  If this suites your needs, modify only the camera names to taste
+# and feed URLs to what your cameras or NVR provides.
+
+# Window names
+
+# 2x2 screen with 3 off-screen windows
+#windows=(upper_left upper_right lower_left lower_right off_screen off_screen2 off_screen3)
+windows=(s1c1,s1c2,s1c3,s1c4,s2c1,s2c2,s2c3,s2c4,s3c1,s3c2,s3c3,s3c4)
+
+# Make sure to account for each window above in the list below.
+
+# Windows positions
+
+window_positions=(
+#Screen 1
+#s1c1
+"0 0 511 383" \
+#s1c2
+"512 0 1023 383" \
+#s1c3
+"0 384 511 767" \
+#s1c4
+"512 384 1023 767" \
+
+#Screen 2
+#s2c1
+"1024 0 1535 383" \
+#s2c2
+"1536 0 2047 383" \
+#s2c3
+"1024 384 1535 767" \
+#s2c4
+"1536 384 2047 767" \
+
+Screen 3
+#s3c1
+"2048 0 2559 383" \
+#s3c2
+"2560 0 3071 383" \
+#s3c3
+"2048 384 2559 767" \
+#s3c4
+"2560 384 3071 767" \
+
+#First Row
+#upper_left
+# 960x540
+#"0 0 959 539" \
+#upper_right
+# 960x540
+#"960 0 1920 539" \
+
+#Second Row (missing all but the far right window because large_left is double size
+#lower_left
+# 960x540
+#"0 540 959 1079" \
+#lower_right
+# 960x540
+#"960 540  1919 1079" \
+
+#off-screen
+# 960x540 window just off-screen to the right
+#"1920 0 2879 539" \
+# 960x540 window just below the other
+#"1920 540 2879 1079" \
+# 960x540 window just off-screen to the left
+#"2880 0 3839 539" \
+)
+
+# Camera Names
+
+#camera_names=(NE SE South SW West Vestibule)
+camera_names=(cns1c1 cns1c2 cns1c3 cns1c4 cns2c1 cns2c2 cns2c3 cns2c4 cns3c1 cns3c2 cns3c3 cns3c4)
+# Make sure to account for each camera above in the list of feeds below.
+
+# Camera Feeds
+
+camera_feeds=( \
+# Mid-Res if your RPi can handle the load
+#cns1c1
+"rtsp://10.1.8.253:7447/5b85280cb07d32af7d9d5122_2" \
+#cns1c2
+"rtsp://10.1.8.253:7447/58d3d372e4b03b4107ccf2b3_2" \
+#cns1c3
+"rtsp://10.1.8.253:7447/5a7c0d87e4b0d6cdfb8e5d48_2" \
+#cns1c4
+"rtsp://10.1.0.25:7447/5f5a36a14cabb278b6996663_2" \
+
+#cns2c1
+"rtsp://10.1.8.253:7447/55afb7b3e68320b007c89eb6_2" \
+#cns2c2
+"rtsp://10.1.8.253:7447/58d3d58ee4b03b4107ccf8b4_2" \
+#cns2c3
+"rtsp://10.1.8.253:7447/58d3d92be4b0f5ccd5ca0149_2" \
+#cns2c4
+"rtsp://10.1.8.253:7447/5b5594b1429163364af61e46_2" \
+
+#cns3c1
+"rtsp://10.1.8.253:7447/55afbd53e68320b007c89f05_2" \
+#cns3c2
+"rtsp://10.1.8.253:7447/58d3d92be4b0f5ccd5ca0149_2" \
+#cns3c3
+"rtsp://10.1.8.253:7447/55ba4a45e68320b007c91741_2" \
+#cns3c4
+"rtsp://10.1.8.253:7447/55bb30a9e68320b007c925f7_2" \
+)
+
+# Are we rotating cameras through the window matrix? (default false if not set here)
+# rotate="true"
