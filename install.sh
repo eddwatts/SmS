@@ -111,7 +111,8 @@ echo "25 6 * * * /home/pi/tvon.py" >> mycron
 echo "25 6 * * * vcgencmd display_power 1" >> mycron
 crontab mycron
 rm mycron
-sudo apt-get install unclutter screen omxplayer i2c-tools cec-utils wkhtmltopdf -y
+sudo apt-get update
+sudo apt-get install unclutter screen omxplayer fbi i2c-tools cec-utils wkhtmltopdf -y
 sudo apt-get purge piwiz idle3 java-common geany -y
 sudo apt-get clean
 sudo apt-get autoremove -y
