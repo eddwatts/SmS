@@ -32,6 +32,42 @@ sudo raspi-config nonint do_spi 0
 sudo raspi-config nonint do_i2c 0
 sudo raspi-config nonint do_serial 0
 sudo raspi-config nonint do_onewire 0
+if [[ $mode == *"cctv"* ]]; then
+sudo raspi-config nonint do_boot_behaviour B2
+curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
+chmod +x /home/pi/cctv.sh
+fi
+if [[ $mode == *"NewView"* ]]; then
+sudo mkdir /etc/displaycameras
+sudo curl -o "/usr/bin/displaycameras" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/displaycameras" -L
+sudo curl -o "/etc/systemd/system/displaycameras.service" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/displaycameras.service" -L
+sudo curl -o "/etc/displaycameras/layout.conf.default" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/layout.conf.default" -L
+sudo curl -o "/etc/displaycameras/displaycameras.conf" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/displaycameras.conf" -L
+sudo curl -o "/usr/bin/omxplayer_dbuscontrol" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/omxplayer_dbuscontrol" -L
+sudo curl -o "/usr/bin/rotatedisplays" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/rotatedisplays" -L
+sudo curl -o "/usr/bin/black.png" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/black.png" -L
+sudo curl -o "/etc/cron.d/repaircameras/repaircameras.cron" "https://raw.githubusercontent.com/Anonymousdog/displaycameras/master/repaircameras.cron" -L
+curl -o "/etc/displaycameras/layout.conf.default" $url?random=$RANDOM -L
+sudo chown root:root /usr/bin/displaycameras
+sudo chmod 0755 /usr/bin/displaycameras
+sudo chown root:root /etc/systemd/system/displaycameras.service
+sudo chmod 0644 /etc/systemd/system/displaycameras.service
+sudo chown root:root /etc/displaycameras/layout.conf.default
+sudo chmod 0644 /etc/displaycameras/layout.conf.default
+sudo chown root:root /etc/displaycameras/displaycameras.conf
+sudo chmod 0644 /etc/displaycameras/displaycameras.conf
+sudo chown root:root /usr/bin/omxplayer_dbuscontrol
+sudo chmod 0755 /usr/bin/omxplayer_dbuscontrol
+sudo chown root:root /usr/bin/rotatedisplays
+sudo chmod 0755 /usr/bin/rotatedisplays
+sudo chown root:root /usr/bin/black.png
+sudo chown root:root /etc/cron.d/repaircameras
+sudo chmod 0755 /etc/cron.d/repaircameras
+systemctl restart cron
+systemctl daemon-reload
+systemctl enable displaycameras
+sudo raspi-config nonint do_boot_behaviour B2
+fi
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo systemctl disable vncserver-x11-serviced.service
 sudo curl -o "/usr/share/plymouth/themes/pix/splash.png" "https://raw.githubusercontent.com/eddwatts/SmS/master//pi.png?id=$RANDOM" -L
