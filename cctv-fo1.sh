@@ -11,14 +11,14 @@
 source /boot/SmS.cfg
 if [[ $mode == *"cctv"* ]]; then
 # Camera Feeds & Positions 
-top_left="screen -dmS top_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 0 960 540\" rtsp://10.1.8.253:7447/5b85280cb07d32af7d9d5122_2 --live -n -1'"; 
-top_right="screen -dmS top_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 0 1920 540\" rtsp://10.1.8.253:7447/58d3d372e4b03b4107ccf2b3_2 --live -n -1'"; 
-bottom_left="screen -dmS bottom_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 540 960 1080\" rtsp://10.1.8.253:7447/58d3d58ee4b03b4107ccf8b4_2 --live -n -1'"; 
-bottom_right="screen -dmS bottom_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 540 1920 1080\" rtsp://10.1.8.253:7447/5a7c0d87e4b0d6cdfb8e5d48_2 --live -n -1'";
-
-
-
-
+#top_left="screen -dmS top_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 0 960 540\" rtsp://10.1.8.253:7447/5b85280cb07d32af7d9d5122_2 --live -n -1'"; 
+#top_right="screen -dmS top_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 0 1920 540\" rtsp://10.1.8.253:7447/58d3d372e4b03b4107ccf2b3_2 --live -n -1'"; 
+#bottom_left="screen -dmS bottom_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 540 960 1080\" rtsp://10.1.8.253:7447/58d3d58ee4b03b4107ccf8b4_2 --live -n -1'"; 
+#bottom_right="screen -dmS bottom_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 540 1920 1080\" rtsp://10.1.8.253:7447/5a7c0d87e4b0d6cdfb8e5d48_2 --live -n -1'";
+top_left="screen -dmS top_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 0 960 540\" rtsp://10.1.8.252:7447/J00m7DXmIAPYZVu3 --live -n -1'"; 
+top_right="screen -dmS top_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 0 1920 540\" rtsp://10.1.8.252:7447/dbU6YZHyh9cEtbf7 --live -n -1'"; 
+bottom_left="screen -dmS bottom_left sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"0 540 960 1080\" rtsp://10.1.8.252:7447/vVWKu403dHUZxXeG --live -n -1'"; 
+bottom_right="screen -dmS bottom_right sh -c 'omxplayer --avdict rtsp_transport:tcp --win \"960 540 1920 1080\" rtsp://10.1.8.252:7447/e4cnIbK8lb0WmpdV --live -n -1'";
 
 
 # Camera Feed Names 
