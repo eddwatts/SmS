@@ -87,6 +87,7 @@ chmod +x /home/pi/tvoff.sh
 curl -o "/home/pi/tvon.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/tvon.sh?id=$RANDOM" -L
 chmod +x /home/pi/tvon.sh
 sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/button_shutdown.py \&\n&/' /etc/rc.local
+sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/update.sh \&\n&/' /etc/rc.local
 curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
 chmod +x /home/pi/update.sh
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
