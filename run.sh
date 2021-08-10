@@ -16,7 +16,7 @@ MAC="${MAC//:/}"
 MAC=${MAC^^}
 echo "getting file:" $url?MAC=$MAC&random=$RANDOM
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
-curl -o "/home/pi/cctv1.sh" https://staffdashboard.stmichaelsschool.co.uk/CCTV/screens.php?MAC=$MAC&random=$RANDOM -L
+curl -o "/home/pi/cctv1.sh" https://staffdashboard.stmichaelsschool.co.uk/CCTV/screens.php?MAC=$MAC -L
 chmod +x /home/pi/cctv.sh
 chmod +x /home/pi/cctv1.sh
 sudo /home/pi/cctv.sh stop
