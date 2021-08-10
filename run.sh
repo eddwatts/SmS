@@ -11,7 +11,6 @@ sed -i 's/\"exit_type\":\"Crashed\"/\"exit_type\":\"Normal\"/' /home/pi/.config/
 chromium-browser --check-for-update-interval=31536000 --noerrdialogs --incognito --kiosk $url?random=$RANDOM
 fi
 if [[ $mode == *"cctv"* ]]; then
-#read MAC </sys/class/net/$IFACE/address
 read MAC </sys/class/net/eth0/address
 MAC="${MAC//:/}"
 MAC=${MAC^^}
