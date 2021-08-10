@@ -12,6 +12,8 @@ chromium-browser --check-for-update-interval=31536000 --noerrdialogs --incognito
 fi 
 if [[ $mode == *"cctv"* ]]; then
 read MAC </sys/class/net/$IFACE/address
+MAC="${MAC//:/}"
+MAC=${MAC^^}
 echo "getting file:" $url?MAC=$MAC&random=$RANDOM
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
 curl -o "/home/pi/cctv1.sh" https://staffdashboard.stmichaelsschool.co.uk/CCTV/screens.php?MAC=$MAC&random=$RANDOM -L
