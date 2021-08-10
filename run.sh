@@ -15,7 +15,7 @@ echo "getting file:" $url?random=$RANDOM
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
 chmod +x /home/pi/cctv.sh
 sudo /home/pi/cctv.sh stop
-#sudo /home/pi/cctv.sh repair
+sudo /home/pi/cctv.sh repair
 fi
 if [[ $mode == *"NewView"* ]]; then
 sudo systemctl stop displaycameras.service
