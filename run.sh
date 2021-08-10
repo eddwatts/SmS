@@ -11,9 +11,12 @@ sed -i 's/\"exit_type\":\"Crashed\"/\"exit_type\":\"Normal\"/' /home/pi/.config/
 chromium-browser --check-for-update-interval=31536000 --noerrdialogs --incognito --kiosk $url?random=$RANDOM
 fi 
 if [[ $mode == *"cctv"* ]]; then
-echo "getting file:" $url?random=$RANDOM
+read MAC </sys/class/net/$IFACE/address
+echo "getting file:" $url?MAC=$MAC&random=$RANDOM
 curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
+curl -o "/home/pi/cctv1.sh" https://staffdashboard.stmichaelsschool.co.uk/CCTV/screens.php?MAC=$MAC&random=$RANDOM -L
 chmod +x /home/pi/cctv.sh
+chmod +x /home/pi/cctv1.sh
 sudo /home/pi/cctv.sh stop
 #sudo /home/pi/cctv.sh repair
 sudo /home/pi/cctv.sh repair
