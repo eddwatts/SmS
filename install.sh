@@ -90,9 +90,6 @@ sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/button_shutdown.py \&\n&/' /e
 sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/update1.sh \&\n&/' /etc/rc.local
 curl -o "/home/pi/update1.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update1.sh?id=$RANDOM" -L
 chmod +x /home/pi/update1.sh
-mkdir /home/pi/update
-echo 'tmpfs /home/pi/update tmpfs nodev,nosuid,size=100M 0 0' | sudo tee --append /etc/fstab
-sudo mount -a
 #curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
 #chmod +x /home/pi/cctv.sh
 sudo touch /etc/chromium-browser/customizations/01-disable-update-check;echo CHROMIUM_FLAGS=\"\$\{CHROMIUM_FLAGS\} --check-for-update-interval=31536000\" | sudo tee /etc/chromium-browser/customizations/01-disable-update-check
@@ -145,6 +142,20 @@ sudo sed -i 's/#disable_overscan=1/disable_overscan=1/' /boot/config.txt
 #echo 'hdmi_mode=81' | sudo tee --append /boot/config.txt
 #echo 'disable_overscan=1' | sudo tee --append /boot/config.txt
 fi
+mkdir /home/pi/update
+echo 'tmpfs /home/pi/update tmpfs nodev,nosuid,size=100M 0 0' | sudo tee --append /etc/fstab
+sudo mount -a
+echo "deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ bullseye main" | sudo tee /etc/apt/sources.list.d/azlux.list
+sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg  https://azlux.fr/repo.gpg
+sudo apt update
+sudo rm /var/log/*.log
+sudo rm /var/log/lastlog
+sudo rm /var/log/messages
+sudo rm /var/log/syslog
+sudo rm /var/log/syslog.1
+sudo sed -i -e "s/ZL2R=false/ZL2R=true/" /etc/log2ram.conf
+sudo apt install log2ram
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
+
 sudo reboot
