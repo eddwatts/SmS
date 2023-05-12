@@ -153,8 +153,13 @@ sudo rm /var/log/lastlog
 sudo rm /var/log/messages
 sudo rm /var/log/syslog
 sudo rm /var/log/syslog.1
-sudo sed -i -e "s/ZL2R=false/ZL2R=true/" /etc/log2ram.conf
 sudo apt install log2ram
+sudo sed -i -e "s/ZL2R=false/ZL2R=true/" /etc/log2ram.conf
+echo 'dtoverlay=disable-wifi' | sudo tee --append /boot/config.txt
+echo 'dtoverlay=disable-bt' | sudo tee --append /boot/config.txt
+echo 'arm_freq=500' | sudo tee --append /boot/config.txt
+echo 'arm_freq_max=500' | sudo tee --append /boot/config.txt
+echo 'avoid_warnings=1' | sudo tee --append /boot/config.txt
 sudo raspi-config nonint do_hostname $hostname
 sudo echo -e "raspberry\n$mypass\n$mypass" | passwd
 
