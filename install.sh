@@ -87,17 +87,20 @@ chmod +x /home/pi/tvoff.sh
 curl -o "/home/pi/tvon.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/tvon.sh?id=$RANDOM" -L
 chmod +x /home/pi/tvon.sh
 sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/button_shutdown.py \&\n&/' /etc/rc.local
-sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/update.sh \&\n&/' /etc/rc.local
-curl -o "/home/pi/update.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update.sh?id=$RANDOM" -L
-chmod +x /home/pi/update.sh
-curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
-chmod +x /home/pi/cctv.sh
+sudo sed -i '0,/^[ \t]*exit[ \t]\+0/s//\/home\/pi\/update1.sh \&\n&/' /etc/rc.local
+curl -o "/home/pi/update1.sh" "https://raw.githubusercontent.com/eddwatts/SmS/master/update1.sh?id=$RANDOM" -L
+chmod +x /home/pi/update1.sh
+mkdir /home/pi/update
+echo 'tmpfs /home/pi/update tmpfs nodev,nosuid,size=100M 0 0' | sudo tee --append /etc/fstab
+sudo mount -a
+#curl -o "/home/pi/cctv.sh" $url?random=$RANDOM -L
+#chmod +x /home/pi/cctv.sh
 sudo touch /etc/chromium-browser/customizations/01-disable-update-check;echo CHROMIUM_FLAGS=\"\$\{CHROMIUM_FLAGS\} --check-for-update-interval=31536000\" | sudo tee /etc/chromium-browser/customizations/01-disable-update-check
 echo '@xset s off' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset -dpms' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@xset s noblank' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 echo '@unclutter -idle 0 -root' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
-echo '@/home/pi/update.sh' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
+echo '@/home/pi/update1.sh' | sudo tee --append /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/@xscreensaver/#@xscreensaver/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/@lxpanel/#@lxpanel/' /etc/xdg/lxsession/LXDE-pi/autostart
 sudo sed -i 's/point-rpi/#point-rpi/' /etc/xdg/lxsession/LXDE-pi/autostart
