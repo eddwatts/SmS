@@ -12,4 +12,4 @@ curl -o "/home/pi/update/cctv1.sh" https://staffdashboard.stmichaelsschool.co.uk
 sed -i -e 's/\r$//' /home/pi/update/cctv1.sh
 chmod +x /home/pi/update/cctv1.sh
 /home/pi/update/cctv1.sh stop
-/home/pi/update/cctv1.sh repair
+#/home/pi/update/cctv1.sh repair
