@@ -1,5 +1,7 @@
 #!/bin/bash
 IFS="$IFS"$'\r'
+_IP=$(hostname -I) || true
+sudo wall -n "IP Address: "$_IP
 #curl -o "/home/pi/update/tempnet.py" "https://raw.githubusercontent.com/eddwatts/SmS/master/tempnet.py?id=$RANDOM" -L
 #chmod +x /home/pi/update/tempnet.py
 read MAC </sys/class/net/eth0/address
